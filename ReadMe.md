@@ -1,3 +1,6 @@
+## Gitter chatroom 
+https://gitter.im/Transform/android-testing-a-new-hope
+
 ## Introduction
 Presented by Nic Jackson and Zan Markan, who work on the native apps team at Marks and Spencer, our talk will take a brief look at the different options available for Android testing. Driven from our experience of rebuilding the M&S Android app and from a love for TDD and BDD, it's going to be a fun-filled action-packed approach, littered with tenuous Star Wars references and geek humour.
 
