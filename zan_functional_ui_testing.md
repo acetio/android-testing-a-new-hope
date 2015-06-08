@@ -24,4 +24,57 @@ Of course such a fancy high tech contraption has its weaknesses, we'll check mor
 Espresso is the newest most technologically advanced corvette in the fleet of Google Empire. It's super efficient and capable of devastating attacks.
 It's also probably the most low level of the functional alternatives, tying neatly among other androidTest test cases.
 
-### Calabash 
+### Calabash
+
+As mentioned, calabash is great as it joins the fairyland of business with the real world - that is, of us developers.
+
+We can define features in gherkin, usually in cooperation with our product owner and then write our tests to match that acceptance criteria.
+
+We can then integrate that nicely with Xamarin Test Cloud to run our acceptance tests on the cloud on as many devices as we want.
+
+So we write and write our tests and suddenly end up with 100-200 bdd style tests that take 3 hours to run.
+
+Samples of scenarios covered:
+- I correctly login
+- I incorrectly login
+- press login with no password
+- press login with no username
+- press login with invalid username
+
+These run every. single. time. It's super easy to overdo calabashing, because it's so convenient. We must not fall into that trap.
+
+(Insert It's a trap Akbar!)
+
+Hard to run them on a bog standard emulator, allegedly good things coming in near future that improve the emulators a lot.
+
+Haxm helps. So does genymotion but good luck starting that thing on any kind of VM.  (Apparently it's possible to improve it if you're into kernel hacking)
+
+HTTPAliveDisconnected happens too many times. Solution is only to kill ruby, adb, and keep retrying. Sometimes ritual slaughter of small mammals also helps.
+
+Timeouts are shit.
+
+Mocking web services is a ball ache. Wiremock could be better. We are using mimic to mock them. Xamarin tests run against a heroku instance with our setup.
+Fragile and flaky as hell at the moment.
+
+### Espresso
+
+Espresso is clever. It's main two selling points are a fluid api based on hamcrest matchers and clever idle detection that enables your test steps to proceed as quickly as items are presented on the screen and animations have ended.
+
+Pain points:
+Starting Espresso tests on a mature project - migrating tests from calabash.
+Dependencies in AndroidTest aren't much fun.
+
+
+### Food for thought
+
+Calabash without the ruby.
+
+Calabash is built on top of Robotium and Cucumber.
+
+What if we could write cucumber tests and implement them not in ruby, but in native java instead?
+
+Currently experimenting with a way to use Cucumber JVM in conjunction with Espresso for a "calabash effect". Would work nicely on a bog standard emulator, even on Travis CI (or jenkins).
+
+Suppose we want to keep a few of our "normal" instrumentation tests, you can play around with build types to pick a runner for each build type / flavour combination.
+
+Initial experiments were promising, working on them in my spare time.
