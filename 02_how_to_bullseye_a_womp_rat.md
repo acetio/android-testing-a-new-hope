@@ -22,4 +22,4 @@ There are various methods to perform this attack we have.
 * Robotium
 * JVM based testing
 
-These attacks require a little more detail so I will hand you over to Zan Skywalker who will continue this breifing.
+These attacks require a little more detail so I will hand you over to Zan Skywalker who will continue this briefing.

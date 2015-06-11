@@ -1,5 +1,16 @@
 # Unit Testing on the JVM vs Roboelectric - Even R2 makes mistakes
-* History, why we need this
-* The pain, getting robotium to work with gradle in the early days
-* Dangers of third party frameworks
-* Why this is no longer really needed due to android mocks (JUnit4)
+
+Let me give you a little history of the Rebel alliance...
+In the early days we only really had two attack formations, Plain Unit Tests and Activity Instrumentations tests.  By standard everything in the Android galaxy from a test perspective would run against the Android operating system.  This meant that you needed to execute tests on either a physical device or on a Android VM.  The downside of this was it is just painfully slow, Android VM's took ages to start and every time you ran your test you needed to compile the application and install it to either the device or VM.
+
+With standard Unit Tests assuming you had managed your dependencies with only standard Java framework dependencies you could run them in the JVM direct on your machine.  This was faster but it was not standard and require you to have at least a basic grasp of Jedi powers to get this set up.
+
+It is however really difficult to keep Android dependencies out of an android application, you could abstract the interface of them then create mocks and stubs for these abstractions but it will take longer than it takes the Sarlacc pit monster to digest your body after you had voluntarily thrown yourself into it to take the pain of the abstraction away.
+
+Then came Roboelectric, Roboelectric is a framework which manages this abstraction for you, you can test code which contains things like the GPS Service or Android Preferences with the minimum of effort.  You can also even test Activites by using the Roboelectric activity builder instead of ActivityInstrumentationTest classes, there will be more on why this last part is a bad idea later.
+
+The dangers of doing this is that when Google decide to change Android, and they do this frequently Roboelectric is likely to break and will take time to catch up.  One such instance of this which kept Zan Skywalker and I from our sleep for many nights was the change from Ant to Gradle.  We wanted to use Gradle because it is so much more powerful and a cleaner way of expressing our build files.  But there was no plugin for Roboelectric, Google have very clear ideas on the way they would like us to develop and my recommendation is not to try too hard to fight this or you end up in a whole world of pain which makes being digested by a Sarlacc pit monster look like a Sunday morning.
+
+Thankfully they did listen and recently with the version 1 release of Android Studio and version 22 of the gradle build and Android SDK they implemented JUnit4 which contained mocks for the entire Android eco system allowing you to run your tests on the JVM and feel comfortable that when the SDK updated then so would the Android Mocks as they were tightly bound to the SDK release.
+
+Now my padawans, you may remember I warned you about the dark side of trying to run too many tests in the JVM, especially your activity life cycle tests.  We all lust for speed however we need balance in the force and testing visual elements in a non visual envrionment is not necessary the best thing to do.  There is real benefit to running ActivityInstrumentation in an emulator or on a physical device as when this test runs a real instance of the activity is created in the same way you would open the application.  This allows you to test that you have other elements for the view set up such as the visual elements which can not be done with 100% certainty using Roboelectric.  Do not worry about the speed in these instances, keep your views thin and separate your tests out into two sets.  Android Studio allows you to manage this very nicely with the latest release.
