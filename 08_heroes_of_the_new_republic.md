@@ -38,3 +38,9 @@ http://fragmentedpodcast.com/
 
 Android developers backstage (Chet Haase and Tor Norbye)
 http://androidbackstage.blogspot.co.uk/2015/04/episode-25-espresso.html
+
+Square island - Chiu-ki Chan's blog
+http://blog.sqisland.com/
+
+The Corner - Square's blog
+https://corner.squareup.com/
